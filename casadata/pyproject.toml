@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "casadata"
+version = "0.1.0"
+description = "Plateforme de données du marché immobilier résidentiel de Casablanca — observations historisées multi-sources"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "duckdb>=1.0",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+parse = ["selectolax>=0.3", "beautifulsoup4>=4.12"]
+
+[project.scripts]
+casadata = "casadata.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+casadata = ["schema.sql", "geo/gazetteer.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

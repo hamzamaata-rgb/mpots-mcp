@@ -1,0 +1,9 @@
+data/*
+!data/incoming/
+data/incoming/*
+!data/incoming/README.md
+__pycache__/
+*.egg-info/
+.pytest_cache/
+*.duckdb
+*.duckdb.wal
