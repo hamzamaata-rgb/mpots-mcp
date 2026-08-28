@@ -4,7 +4,7 @@ Base de donnees d'annonces de location residentielle a Casablanca, a visee stati
 (loyer median au m2 par quartier et typologie, dispersion, evolution, tension locative).
 L'objectif est un echantillon propre et documente, pas un crawl exhaustif.
 
-Etat : **code de collecte complet et teste (120 tests), mais aucune donnee collectee.**
+Etat : **chaine complete ecrite et testee (147 tests), mais aucune donnee collectee.**
 L'environnement d'execution distant bloque tout egress HTTPS hors registres de paquets
 (`avito.ma`, `mubawab.ma` et `web.archive.org` renvoient 403 au CONNECT du proxy), donc
 la premiere collecte reste a lancer depuis une machine au reseau ouvert.
