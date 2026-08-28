@@ -4,8 +4,10 @@ Base de donnees d'annonces de location residentielle a Casablanca, a visee stati
 (loyer median au m2 par quartier et typologie, dispersion, evolution, tension locative).
 L'objectif est un echantillon propre et documente, pas un crawl exhaustif.
 
-Etat : **etape 1 terminee** (schema, referentiel quartiers, normalisation testee).
-Le parser Avito (etape 2) n'est pas encore ecrit — il attend la validation du referentiel.
+Etat : **code de collecte complet et teste (120 tests), mais aucune donnee collectee.**
+L'environnement d'execution distant bloque tout egress HTTPS hors registres de paquets
+(`avito.ma`, `mubawab.ma` et `web.archive.org` renvoient 403 au CONNECT du proxy), donc
+la premiere collecte reste a lancer depuis une machine au reseau ouvert.
 
 ## Installation
 
@@ -16,6 +18,25 @@ python3 -m venv venv
 ./venv/bin/python -m pytest tests/ -q
 ```
 
+## Lancer la collecte
+
+```bash
+./venv/bin/python collect.py --probe        # 1. calibration - OBLIGATOIRE la premiere fois
+./venv/bin/python collect.py --pages 5      # 2. premiere collecte reelle
+./venv/bin/python dedup.py                  # 3. rattachement des republications
+./venv/bin/python db.py --stats
+```
+
+`--probe` telecharge une page, l'ecrit dans `samples/` et affiche combien d'annonces
+chaque strategie de parsing en tire. Tant qu'il ne renvoie pas un gabarit exploitable,
+`--pages` ne collectera rien : les URLs de recherche et les selecteurs DOM ont ete ecrits
+sans acces au site reel et doivent etre confrontes a une page d'aujourd'hui. Un HTML
+sauvegarde se rejoue hors ligne avec `collect.py --html-file samples/xxx.html`.
+
+Le collecteur s'arrete de lui-meme sur un 403 ou un 429, sur un `robots.txt` defavorable,
+et quand aucune annonce n'est extraite d'une page (parser a recalibrer) — dans tous les cas
+avec une ligne dans `runs` expliquant pourquoi.
+
 ## Fichiers
 
 | Fichier | Role |
@@ -24,7 +45,10 @@ python3 -m venv venv
 | `db.py` | Creation de la base, synchronisation du referentiel, stats |
 | `quartiers_seed.csv` | **Referentiel des quartiers — source de verite, a editer a la main** |
 | `normalize.py` | Extraction et normalisation : surface, loyer, typologie, quartier, PII, score qualite |
-| `tests/test_normalize.py` | 79 tests unitaires |
+| `avito.py` | Parser : payload Next.js, JSON-LD, repli DOM. Pur, sans reseau |
+| `collect.py` | Collecte courante : debit limite, robots.txt, idempotence, journal de run |
+| `dedup.py` | Rattachement des republications via `duplicate_of` |
+| `tests/` | 120 tests (79 normalisation + 41 parser, collecte, dedoublonnage) |
 | `data/casa_rentals.db` | Base locale (non versionnee) |
 
 Le referentiel s'edite dans le CSV, jamais directement en base : `python db.py --sync-quartiers`
