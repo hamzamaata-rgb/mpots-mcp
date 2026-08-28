@@ -8,3 +8,9 @@ __pycache__/
 .DS_Store
 .claude/
 CLAUDE.md
+
+# casa_rentals
+casa_rentals/data/*.db
+casa_rentals/data/*.db-wal
+casa_rentals/data/*.db-shm
+.pytest_cache/

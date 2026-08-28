@@ -1,0 +1,48 @@
+nom,aliases,arrondissement,segment,perimetre
+Anfa,anfa|anfa superieur|anfa sup|val d anfa|casa anfa|anfa place|أنفا,Anfa,haut,casablanca
+Aïn Diab,ain diab|aindiab|ayn diab|corniche|corniche ain diab|عين الذئاب,Anfa,haut,casablanca
+Californie,californie|californy|california|kaliforni|كاليفورنيا,Aïn Chock,haut,casablanca
+Gauthier,gauthier|gautier|gaithier|triangle d or|triangle dor|غوتييه,Maârif,haut,casablanca
+Racine,racine|rasine|racin|راسين,Anfa,haut,casablanca
+Bourgogne,bourgogne|bourgone|bourgogne ouest|burgone|بورغون,Anfa,haut,casablanca
+Palmier,palmier|les palmiers|palmiers|النخيل,Maârif,haut,casablanca
+CFC,cfc|casa finance city|casablanca finance city|casa anfa cfc,Anfa,haut,casablanca
+Maârif,maarif|el maarif|maarif extension|extension maarif|maarif ext|المعاريف,Maârif,intermediaire,casablanca
+CIL,cil|c i l|hay cil|quartier cil,Maârif,intermediaire,casablanca
+Oasis,oasis|el oasis|lwaha|الواحة,Aïn Chock,intermediaire,casablanca
+Beauséjour,beausejour|beau sejour|bausejour,Hay Hassani,intermediaire,casablanca
+Ghandi,ghandi|gandhi|bd ghandi|boulevard ghandi|غاندي,Maârif,intermediaire,casablanca
+Val Fleuri,val fleuri|valfleuri|val fleurie,Maârif,intermediaire,casablanca
+Longchamps,longchamps|long champs|longchamp|hay el hana|hay lhana,Anfa,intermediaire,casablanca
+Riviera,riviera|rivera,Anfa,intermediaire,casablanca
+Sidi Maârouf,sidi maarouf|sidi marouf|sidi maarof|سيدي معروف,Aïn Chock,intermediaire,casablanca
+Polo,polo|quartier polo,Aïn Chock,intermediaire,casablanca
+Belvédère,belvedere|belvedaire|belvidere|بلفيدير,Mers Sultan,intermediaire,casablanca
+2 Mars,2 mars|deux mars|2mars|bd 2 mars|boulevard 2 mars|عين مارس,Al Fida,intermediaire,casablanca
+Mers Sultan,mers sultan|mers soltane|mers sltane|مرس السلطان,Mers Sultan,intermediaire,casablanca
+Sidi Belyout,sidi belyout|centre ville|centre-ville|casablanca centre|downtown|سيدي بليوط,Sidi Belyout,intermediaire,casablanca
+Hay Hassani,hay hassani|hay hassan|el hassani|الحي الحسني,Hay Hassani,intermediaire,casablanca
+Lissasfa,lissasfa|lisasfa|ليساسفة,Hay Hassani,intermediaire,casablanca
+Derb Ghallef,derb ghallef|derb ghalef|derb ghallaf|درب غلف,Maârif,populaire,casablanca
+Roches Noires,roches noires|roche noire|assoukhour assawda|الصخور السوداء,Aïn Sebaâ,populaire,casablanca
+Aïn Sebaâ,ain sebaa|ain sbaa|ayn sebaa|عين السبع,Aïn Sebaâ,populaire,casablanca
+Sidi Bernoussi,sidi bernoussi|bernoussi|sidi brnoussi|bernousi|سيدي البرنوصي,Sidi Bernoussi,populaire,casablanca
+Sidi Moumen,sidi moumen|sidi momen|سيدي مومن,Sidi Moumen,populaire,casablanca
+Aïn Chock,ain chock|ain chok|ayn chok|عين الشق,Aïn Chock,populaire,casablanca
+Hay Mohammadi,hay mohammadi|hay mohamadi|الحي المحمدي,Hay Mohammadi,populaire,casablanca
+Al Fida,al fida|el fida|lfida|الفداء,Al Fida,populaire,casablanca
+Habous,habous|quartier habous|nouvelle medina|الأحباس,Al Fida,populaire,casablanca
+Ancienne Médina,ancienne medina|ancienne medine|medina|المدينة القديمة,Sidi Belyout,populaire,casablanca
+Oulfa,oulfa|hay oulfa|el oulfa|الألفة,Hay Hassani,populaire,casablanca
+Ben M'Sick,ben msick|ben msik|benmsick|بن مسيك,Ben M'Sick,populaire,casablanca
+Sbata,sbata|سباتة,Sbata,populaire,casablanca
+Sidi Othmane,sidi othmane|sidi otmane|سيدي عثمان,Sidi Othmane,populaire,casablanca
+Moulay Rachid,moulay rachid|my rachid|moulay rchid|مولاي رشيد,Moulay Rachid,populaire,casablanca
+Quartier des Hôpitaux,quartier des hopitaux|les hopitaux|hopitaux,Mers Sultan,intermediaire,casablanca
+Aïn Borja,ain borja|ayn borja|عين البرجة,Al Fida,populaire,casablanca
+Bouskoura,bouskoura|bouskora|ville verte|bouskoura ville verte|بوسكورة,Nouaceur (hors commune),intermediaire,peripherie
+Dar Bouazza,dar bouazza|dar bouaza|dar bouazza plage|دار بوعزة,Nouaceur (hors commune),intermediaire,peripherie
+Errahma,errahma|er rahma|al rahma|الرحمة,Nouaceur (hors commune),populaire,peripherie
+Nouaceur,nouaceur|nouasseur|النواصر,Nouaceur (hors commune),populaire,peripherie
+Mohammedia,mohammedia|mohamadia|mohammadia|المحمدية,Mohammedia (hors commune),intermediaire,peripherie
+Tit Mellil,tit mellil|tit melil|mediouna|تيط مليل,Médiouna (hors commune),populaire,peripherie
