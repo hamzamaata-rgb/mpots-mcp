@@ -469,3 +469,34 @@ def test_dedup_est_idempotent(conn, ref):
     _inserer(conn, ref, "u2", "2026-08-20", description=desc, surface_m2=85, loyer_mad=9000)
     assert len(dedup.marquer_doublons(conn)) == 1
     assert dedup.marquer_doublons(conn) == []      # deja marque, plus rien a faire
+
+
+def test_robots_absent_autorise_la_collecte():
+    """404 sur robots.txt = pas de regles = tout est autorise (RFC 9309)."""
+    transport = _transport({
+        "robots.txt": httpx.Response(404),
+        "casablanca": httpx.Response(200, text=html_next_data()),
+    })
+    with collect.Client(delai=(0, 0), transport=transport) as client:
+        assert client.get("https://www.avito.ma/fr/casablanca/appartements")
+
+
+def test_robots_en_erreur_serveur_arrete_la_collecte():
+    """5xx sur robots.txt : on ne crawle pas un serveur en difficulte."""
+    transport = _transport({
+        "robots.txt": httpx.Response(503),
+        "casablanca": httpx.Response(200, text=html_next_data()),
+    })
+    with collect.Client(delai=(0, 0), transport=transport) as client:
+        with pytest.raises(collect.CollecteArretee, match="503"):
+            client.get("https://www.avito.ma/fr/casablanca/appartements")
+
+
+def test_robots_injoignable_arrete_la_collecte():
+    """Ne pas avoir pu lire les regles n'est pas une permission."""
+    def handler(request: httpx.Request) -> httpx.Response:
+        raise httpx.ConnectError("reseau coupe")
+
+    with collect.Client(delai=(0, 0), transport=httpx.MockTransport(handler)) as client:
+        with pytest.raises(collect.CollecteArretee, match="injoignable"):
+            client.get("https://www.avito.ma/fr/casablanca/appartements")

@@ -88,8 +88,17 @@ class Client:
         self.derniere_requete = time.monotonic()
 
     def robots_autorise(self, url: str) -> bool:
-        """Lit et met en cache le robots.txt du domaine. Un robots illisible => on continue,
-        un robots explicite qui interdit => on s'arrete."""
+        """Lit et met en cache le robots.txt du domaine.
+
+        Suit la RFC 9309 sur les cas d'echec, parce que la difference compte :
+          - 200            : on applique le fichier ;
+          - 4xx (404 …)    : pas de robots.txt, tout est autorise ;
+          - 5xx            : serveur en difficulte, on s'interdit de crawler ;
+          - erreur reseau  : on ne sait pas, donc on ne crawle pas a l'aveugle.
+
+        Les deux derniers cas levent `CollecteArretee` plutot que de laisser passer :
+        ne pas avoir pu lire les regles n'est pas une permission.
+        """
         base = f"{urlparse(url).scheme}://{urlparse(url).netloc}"
         rp = self._robots.get(base)
         if rp is None:
@@ -98,9 +107,17 @@ class Client:
             try:
                 reponse = self._client.get(f"{base}/robots.txt")
                 self.requetes += 1
-                rp.parse(reponse.text.splitlines() if reponse.status_code == 200 else [])
-            except httpx.HTTPError:
-                rp.parse([])
+            except httpx.HTTPError as exc:
+                raise CollecteArretee(
+                    f"robots.txt de {base} injoignable ({type(exc).__name__}) : "
+                    "impossible de verifier les regles, arret."
+                ) from exc
+            if reponse.status_code >= 500:
+                raise CollecteArretee(
+                    f"robots.txt de {base} renvoie {reponse.status_code} : "
+                    "serveur en difficulte, on ne crawle pas."
+                )
+            rp.parse(reponse.text.splitlines() if reponse.status_code == 200 else [])
             self._robots[base] = rp
         return rp.can_fetch(self.ua, url)
 
