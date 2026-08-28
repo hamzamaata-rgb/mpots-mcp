@@ -24,7 +24,7 @@ python3 -m venv venv
 ./venv/bin/python collect.py --probe        # 1. calibration - OBLIGATOIRE la premiere fois
 ./venv/bin/python collect.py --pages 5      # 2. premiere collecte reelle
 ./venv/bin/python dedup.py                  # 3. rattachement des republications
-./venv/bin/python db.py --stats
+./venv/bin/python analyse.py                # 4. couverture et cellules sous le seuil
 ```
 
 `--probe` telecharge une page, l'ecrit dans `samples/` et affiche combien d'annonces
@@ -48,7 +48,11 @@ avec une ligne dans `runs` expliquant pourquoi.
 | `avito.py` | Parser : payload Next.js, JSON-LD, repli DOM. Pur, sans reseau |
 | `collect.py` | Collecte courante : debit limite, robots.txt, idempotence, journal de run |
 | `dedup.py` | Rattachement des republications via `duplicate_of` |
-| `tests/` | 120 tests (79 normalisation + 41 parser, collecte, dedoublonnage) |
+| `analyse.py` | Couverture, loyers au m2 par cellule, durees de mise en ligne |
+| `analyse.ipynb` | Notebook d'analyse en coupe (habillage de `analyse.py`) |
+| `poids_arrondissements.csv` | **Gabarit vide** : populations a renseigner pour l'annexe ponderee |
+| `METHODO.md` | Note methodologique : sources, exclusions, biais, indice hedonique |
+| `tests/` | 144 tests (79 normalisation + 41 collecte + 24 analyse) |
 | `data/casa_rentals.db` | Base locale (non versionnee) |
 
 Le referentiel s'edite dans le CSV, jamais directement en base : `python db.py --sync-quartiers`
